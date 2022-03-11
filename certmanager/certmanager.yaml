@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: certmanager
+  namespace: argocd
+spec:
+  destination:
+    namespace: management
+    server: https://kubernetes.default.svc
+  project: management
+  source:
+    helm:
+      valueFiles:
+        - values.yaml
+    path: manifests/certmanager
+    repoURL: git@github.com:HackyPenguin/home-certmanager.git
+    targetRevision: HEAD
+  syncPolicy: {}
